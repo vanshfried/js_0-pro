@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Quote Generator</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        padding: 60px;
+      }
+
+      .quote-box {
+        font-size: 1.4rem;
+        font-style: italic;
+        margin-bottom: 20px;
+        min-height: 60px;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="quote-box" id="quote">Click the button to get a quote!</div>
+    <button id="new-quote">Show Another</button>
+
+    <script>
+      const quotes = [
+        "Everything you can imagine is real. — Pablo Picasso",
+        "Do or do not. There is no try. — Yoda",
+        "Simplicity is the soul of efficiency. — Austin Freeman",
+        "Code is like humor. When you have to explain it, it’s bad. — Cory House",
+        "The best way to get started is to quit talking and begin doing. — Walt Disney",
+        "Stay hungry, stay foolish. — Steve Jobs",
+        "First, solve the problem. Then, write the code. — John Johnson",
+      ];
+
+      const quoteBox = document.getElementById("quote");
+      const button = document.getElementById("new-quote");
+
+      let lastIndex = -1;
+
+      button.addEventListener("click", () => {
+        let index;
+
+        do {
+          index = Math.floor(Math.random() * quotes.length);
+        } while (index === lastIndex);
+
+        lastIndex = index;
+        quoteBox.textContent = quotes[index];
+      });
+    </script>
+  </body>
+</html>
