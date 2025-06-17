@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Zoom on Hover</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+    }
+
+    .zoom-container {
+      width: 400px;
+      height: 300px;
+      overflow: hidden;
+      border: 2px solid #444;
+      position: relative;
+    }
+
+    .zoom-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="zoom-container">
+    <img src="https://picsum.photos/id/1005/600/400" alt="Zoomable Image">
+  </div>
+
+  <script>
+    const container = document.querySelector('.zoom-container');
+    const img = container.querySelector('img');
+
+    container.addEventListener('mousemove', function (e) {
+      const rect = container.getBoundingClientRect(); // get container size and position
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+      img.style.transformOrigin = `${x}% ${y}%`; // set zoom focus point
+      img.style.transform = 'scale(2)'; // zoom in
+    });
+
+    container.addEventListener('mouseleave', function () {
+      img.style.transform = 'scale(1)'; // reset zoom
+    });
+  </script>
+
+</body>
+</html>

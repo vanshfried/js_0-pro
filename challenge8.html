@@ -1,39 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Image Slider</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 40px;
-    }
-    img {
-      width: 300px;
-      height: 200px;
-      object-fit: cover;
-      border: 2px solid #444;
-      margin-bottom: 20px;
-    }
-    button {
-      padding: 10px 20px;
-      margin: 0 10px;
-      font-size: 1rem;
-    }
-  </style>
-</head>
-<body>
-  <h2>🖼️ Image Slider</h2>
-  <img id="slider" src="" alt="Image" />
-  <div>
-    <button id="prev">Previous</button>
-    <button id="next">Next</button>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Slider</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        padding: 40px;
+      }
+      img {
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+        border: 2px solid #444;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 0 10px;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🖼️ Image Slider</h2>
+    <img id="slider" src="" alt="Image" />
+    <div>
+      <button id="prev">Previous</button>
+      <button id="next">Next</button>
+    </div>
 
-  <script>
-    // Your JS goes here
-  </script>
-</body>
+    <script>
+      // Your JS goes here
+      const images = [
+        "https://picsum.photos/id/237/300/200",
+        "https://picsum.photos/id/238/300/200",
+        "https://picsum.photos/id/239/300/200",
+        "https://picsum.photos/id/240/300/200",
+        "https://picsum.photos/id/241/300/200",
+      ];
+      let imageLink = document.getElementById("slider");
+      let index = 0;
+
+      // Initial image load
+      imageLink.src = images[index];
+      document.getElementById("prev").addEventListener("click", () => {
+        index = (index - 1 + images.length) % images.length;
+        imageLink.src = images[index];
+      });
+      document.getElementById("next").addEventListener("click", () => {
+        index = (index + 1) % images.length;
+        imageLink.src = images[index];
+      });
+    </script>
+  </body>
 </html>
