@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live Clock</title>
+  <style>
+    body {
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: 2.5rem;
+      background: #111;
+      color: #0f0;
+      text-align: center;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  <div id="clock">--:--:--</div>
+
+  <script>
+    const clock = document.getElementById("clock");
+
+    const format = (num) => String(num).padStart(2, "0");
+
+    function updateClock() {
+      const now = new Date();
+
+      const day = format(now.getDate());
+      const month = format(now.getMonth() + 1);
+      const year = now.getFullYear();
+
+      let hours = now.getHours();
+      const period = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12 || 12;
+
+      const formattedTime = `${format(hours)}:${format(now.getMinutes())}:${format(now.getSeconds())} ${period}`;
+      const formattedDate = `${day}:${month}:${year}`;
+
+      clock.textContent = `Date: ${formattedDate} | Time: ${formattedTime}`;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
