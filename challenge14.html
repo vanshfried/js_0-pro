@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unit Converter</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 400px;
+        margin: 60px auto;
+        padding: 20px;
+        text-align: center;
+      }
+
+      label {
+        display: block;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      input {
+        padding: 10px;
+        font-size: 1rem;
+        width: 100%;
+        margin-top: 5px;
+        box-sizing: border-box;
+      }
+
+      h2 {
+        margin-bottom: 30px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🌍 Unit Converter</h2>
+
+    <label for="km">Kilometers</label>
+    <input type="number" id="km" placeholder="Enter km" />
+
+    <label for="miles">Miles</label>
+    <input type="number" id="miles" placeholder="Enter miles" />
+    <script>
+      let Kilometers = document.getElementById("km");
+      let Miles = document.getElementById("miles");
+
+      Kilometers.addEventListener("input", () => {
+        const km = parseFloat(Kilometers.value);
+        if (!isNaN(km)) {
+          Miles.value = (km * 0.621371).toFixed(2);
+        } else {
+          Miles.value = "";
+        }
+      });
+
+      Miles.addEventListener("input", () => {
+        const miles = parseFloat(Miles.value);
+        if (!isNaN(miles)) {
+          Kilometers.value = (miles / 0.621371).toFixed(2);
+        } else {
+          Kilometers.value = "";
+        }
+      });
+    </script>
+  </body>
+</html>

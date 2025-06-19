@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 400px;
+        margin: 60px auto;
+        text-align: center;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        font-size: 1rem;
+      }
+      button {
+        padding: 10px;
+        width: 100%;
+        font-size: 1rem;
+        margin-top: 10px;
+      }
+      .result {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>💪 BMI Calculator</h2>
+
+    <input type="number" id="weight" placeholder="Enter weight in kg" />
+    <input type="number" id="height" placeholder="Enter height in cm" />
+
+    <div class="result" id="bmi-result">Your BMI will appear here.</div>
+
+    <script>
+      const weightInput = document.getElementById("weight");
+      const heightInput = document.getElementById("height");
+      const result = document.getElementById("bmi-result");
+
+      function BMI() {
+        const weight = parseFloat(weightInput.value);
+        const heightMtr = parseFloat(heightInput.value) / 100;
+
+        if (
+          isNaN(weight) ||
+          isNaN(heightMtr) ||
+          weight <= 0 ||
+          heightMtr <= 0
+        ) {
+          result.textContent = "Please enter valid positive numbers.";
+          document.body.style.backgroundColor = "#fff"; // Reset background
+          return;
+        }
+
+        const bmi = (weight / (heightMtr * heightMtr)).toFixed(2);
+
+        if (bmi < 18.5) {
+          result.textContent = `Your BMI is ${bmi} — You are underweight.`;
+          document.body.style.backgroundColor = "#87CEFA"; // light blue
+        } else if (bmi < 25) {
+          result.textContent = `Your BMI is ${bmi} — You have a normal weight.`;
+          document.body.style.backgroundColor = "#90EE90"; // light green
+        } else if (bmi < 30) {
+          result.textContent = `Your BMI is ${bmi} — You are overweight.`;
+          document.body.style.backgroundColor = "#FFD700"; // gold/yellow
+        } else {
+          result.textContent = `Your BMI is ${bmi} — You are obese.`;
+          document.body.style.backgroundColor = "#FF6347"; // tomato/red
+        }
+      }
+
+      // ✅ Fixed here
+      weightInput.addEventListener("input", BMI);
+      heightInput.addEventListener("input", BMI);
+    </script>
+  </body>
+</html>

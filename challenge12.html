@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keyboard Event Visualizer</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        flex-direction: column;
+      }
+
+      .key-box {
+        font-size: 2rem;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>⌨️ Press any key</h2>
+    <div class="key-box" id="key-name">Key: -</div>
+    <div class="key-box" id="key-code">Code: -</div>
+    <div class="key-box" id="key-value">ASCII: -</div>
+
+    <script>
+      // Your JS goes here
+      document.addEventListener("keydown", (event) => {
+        document.getElementById("key-name").textContent = `Key: ${event.key}`;
+        document.getElementById("key-code").textContent = `Code: ${event.code}`;
+        document.getElementById(
+          "key-value"
+        ).textContent = `ASCII: ${event.keyCode}`;
+      });
+    </script>
+  </body>
+</html>

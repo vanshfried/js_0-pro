@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Background Color Changer</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        padding-top: 100px;
+        transition: background-color 0.5s ease;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        margin-bottom: 20px;
+        cursor: pointer;
+      }
+
+      .color-name {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="change-btn">Change Background</button>
+    <div class="color-name" id="color-name">Current Color: White</div>
+
+    <script>
+      // Your JavaScript goes here
+      const colors = [
+        "red",
+        "blue",
+        "green",
+        "orange",
+        "purple",
+        "pink",
+        "black",
+        "teal",
+        "gold",
+        "cyan",
+      ];
+      
+      let lastIndex = -1;
+
+      let backColorName = document.getElementById("color-name");
+      document.getElementById("change-btn").addEventListener("click", () => {
+  let index;
+  do {
+    index = Math.floor(Math.random() * colors.length);
+  } while (index === lastIndex);
+  lastIndex = index;
+
+  const selectedColor = colors[index];
+  document.body.style.backgroundColor = selectedColor;
+  backColorName.textContent = `Current Color: ${selectedColor}`;
+  backColorName.style.color = selectedColor === "black" ? "white" : "black"; // readable text
+});
+    </script>
+  </body>
+</html>

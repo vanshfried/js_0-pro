@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 60px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 1rem;
+    }
+    input {
+      width: 100px;
+      margin-right: 10px;
+    }
+    .display {
+      font-size: 2rem;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h2>⏳ Countdown Timer</h2>
+
+  <input type="number" id="seconds" placeholder="Seconds" min="1" />
+  <button id="start">Start</button>
+
+  <div class="display" id="countdown">Ready</div>
+
+  <script>
+    const countdownDisplay = document.getElementById("countdown");
+    const inputSeconds = document.getElementById("seconds");
+    const startButton = document.getElementById("start");
+
+    let intervalId = null;
+
+    function startCountdown(duration) {
+      clearInterval(intervalId); // stop previous timer if running
+      let timeLeft = duration;
+
+      updateDisplay(timeLeft);
+
+      intervalId = setInterval(() => {
+        timeLeft--;
+        updateDisplay(timeLeft);
+
+        if (timeLeft <= 0) {
+          clearInterval(intervalId);
+          countdownDisplay.textContent = "Done!";
+        }
+      }, 1000);
+    }
+
+    function updateDisplay(seconds) {
+      countdownDisplay.textContent = seconds;
+    }
+
+    startButton.addEventListener("click", () => {
+      const input = parseInt(inputSeconds.value, 10);
+
+      if (isNaN(input) || input <= 0) {
+        countdownDisplay.textContent = "Enter a valid number!";
+        return;
+      }
+
+      startCountdown(input);
+    });
+  </script>
+</body>
+</html>
