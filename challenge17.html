@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tip Splitter</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 400px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .tip-buttons button {
+      padding: 8px 12px;
+      margin: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: green;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h2>💸 Tip Splitter</h2>
+
+  <input type="number" id="bill" min="0" placeholder="Enter bill amount (₹)" />
+  <input type="number" id="tip" min="0" placeholder="Enter tip percentage (%)" />
+
+  <div class="tip-buttons">
+    <button data-tip="10">10%</button>
+    <button data-tip="20">20%</button>
+    <button data-tip="30">30%</button>
+    <button data-tip="50">50%</button>
+  </div>
+
+  <input type="number" id="people" min="1" placeholder="Number of people" />
+
+  <div class="result" id="output">Enter values to split the bill.</div>
+
+  <script>
+    const billInput = document.getElementById("bill");
+    const tipInput = document.getElementById("tip");
+    const peopleInput = document.getElementById("people");
+    const output = document.getElementById("output");
+    const tipButtons = document.querySelectorAll(".tip-buttons button");
+
+    function updateSplit() {
+      const bill = parseFloat(billInput.value);
+      const tip = parseFloat(tipInput.value);
+      const people = parseFloat(peopleInput.value);
+
+      if (isNaN(bill) || isNaN(tip) || isNaN(people) || bill <= 0 || tip < 0 || people <= 0) {
+        output.textContent = "⚠️ Please enter valid positive numbers.";
+        output.classList.add("error");
+        return;
+      }
+
+      const total = bill + (bill * tip / 100);
+      const each = (total / people).toFixed(2);
+      output.textContent = `Each person pays: ₹${each}`;
+      output.classList.remove("error");
+    }
+
+    // Manual inputs
+    billInput.addEventListener("input", updateSplit);
+    tipInput.addEventListener("input", updateSplit);
+    peopleInput.addEventListener("input", updateSplit);
+
+    // Preset tip buttons
+    tipButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        tipInput.value = button.dataset.tip;
+        updateSplit();
+      });
+    });
+  </script>
+</body>
+</html>
