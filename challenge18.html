@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Strength Checker</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 400px;
+        margin: 60px auto;
+        text-align: center;
+      }
+      input {
+        padding: 10px;
+        width: 100%;
+        font-size: 1rem;
+        margin-bottom: 10px;
+      }
+      .strength {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🔐 Password Strength Checker</h2>
+    
+
+    <input type="password" id="password" placeholder="Enter password" />
+    <div id="strength">Strength:</div>
+
+    <script>
+      const passwordInput = document.getElementById("password");
+      const strengthDisplay = document.getElementById("strength");
+
+      passwordInput.addEventListener("input", () => {
+        const pwd = passwordInput.value;
+
+        let strength = 0;
+        if (pwd.length >= 8) strength++;
+        if (/[a-z]/.test(pwd)) strength++;
+        if (/[A-Z]/.test(pwd)) strength++;
+        if (/[0-9]/.test(pwd)) strength++;
+        if (/[^A-Za-z0-9]/.test(pwd)) strength++;
+
+        if (strength <= 2) {
+          strengthDisplay.textContent = "Strength: Weak 🔴";
+          strengthDisplay.style.color = "red";
+        } else if (strength === 3 || strength === 4) {
+          strengthDisplay.textContent = "Strength: Medium 🟠";
+          strengthDisplay.style.color = "orange";
+        } else {
+          strengthDisplay.textContent = "Strength: Strong 🟢";
+          strengthDisplay.style.color = "green";
+        }
+      });
+    </script>
+  </body>
+</html>
