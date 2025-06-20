@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        text-align: center;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        width: 70%;
+        font-size: 1rem;
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin-left: 10px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 30px;
+        text-align: left;
+      }
+
+      li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      li.done {
+        text-decoration: line-through;
+        color: gray;
+      }
+
+      .delete-btn {
+        background-color: crimson;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>📝 My To-Do List</h2>
+
+    <input type="text" id="task-input" placeholder="Enter a new task" />
+    <button id="add-btn">Add Task</button>
+
+    <ul id="task-list"></ul>
+
+    <script>
+      const input = document.getElementById("task-input");
+      const button = document.getElementById("add-btn"); // ⚠️ Fixed wrong ID: was "add-task"
+      const list = document.getElementById("task-list");
+
+      button.addEventListener("click", () => {
+        const taskText = input.value.trim();
+        if (taskText === "") return;
+
+        const li = document.createElement("li");
+        li.textContent = taskText;
+
+        // ✅ Make the task togglable (done/undone)
+        li.addEventListener("click", () => {
+          li.classList.toggle("done");
+        });
+
+        // ✅ Add delete button
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "❌";
+        delBtn.classList.add("delete-btn");
+        delBtn.addEventListener("click", (e) => {
+          e.stopPropagation(); // prevent toggle when deleting
+          list.removeChild(li);
+        });
+
+        li.appendChild(delBtn); // add delete button to li
+        list.appendChild(li); // add li to ul
+        input.value = ""; // clear input field
+      });
+    </script>
+  </body>
+</html>
