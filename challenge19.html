@@ -68,7 +68,7 @@
 
     <script>
       const input = document.getElementById("task-input");
-      const button = document.getElementById("add-btn"); // ⚠️ Fixed wrong ID: was "add-task"
+      const button = document.getElementById("add-btn");
       const list = document.getElementById("task-list");
 
       button.addEventListener("click", () => {
@@ -78,7 +78,6 @@
         const li = document.createElement("li");
         li.textContent = taskText;
 
-        // ✅ Make the task togglable (done/undone)
         li.addEventListener("click", () => {
           li.classList.toggle("done");
         });
@@ -88,13 +87,13 @@
         delBtn.textContent = "❌";
         delBtn.classList.add("delete-btn");
         delBtn.addEventListener("click", (e) => {
-          e.stopPropagation(); // prevent toggle when deleting
+          e.stopPropagation();
           list.removeChild(li);
         });
 
-        li.appendChild(delBtn); // add delete button to li
-        list.appendChild(li); // add li to ul
-        input.value = ""; // clear input field
+        li.appendChild(delBtn);
+        list.appendChild(li);
+        input.value = "";
       });
     </script>
   </body>

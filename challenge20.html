@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Habit Tracker</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    input {
+      padding: 10px;
+      width: 70%;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      flex-wrap: wrap;
+    }
+
+    .habit-info {
+      flex: 1 0 100%;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .checkboxes {
+      flex: 1 0 100%;
+      display: flex;
+      gap: 6px;
+      justify-content: start;
+    }
+
+    .delete {
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔥 Daily Habit Tracker</h2>
+
+  <input type="text" id="habit-input" placeholder="Add a new habit..." />
+  <button id="add-btn">Add</button>
+
+  <ul id="habit-list"></ul>
+
+  <script>
+    const habitInput = document.getElementById("habit-input");
+    const addButton = document.getElementById("add-btn");
+    const habitList = document.getElementById("habit-list");
+
+    addButton.addEventListener("click", () => {
+      const name = habitInput.value.trim();
+      if (name === "") return;
+      addHabit(name);
+      habitInput.value = "";
+    });
+
+    function addHabit(name) {
+      const li = document.createElement("li");
+
+      const habitLabel = document.createElement("span");
+      habitLabel.textContent = name;
+      habitLabel.className = "habit-info";
+
+      const days = document.createElement("div");
+      days.className = "checkboxes";
+
+      for (let i = 0; i < 7; i++) {
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        days.appendChild(checkbox);
+      }
+
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "Delete";
+      delBtn.className = "delete";
+      delBtn.addEventListener("click", () => li.remove());
+
+      li.appendChild(habitLabel);
+      li.appendChild(days);
+      li.appendChild(delBtn);
+      habitList.appendChild(li);
+    }
+  </script>
+</body>
+</html>
